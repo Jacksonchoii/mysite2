@@ -95,4 +95,110 @@ public class UserDao {
 		}
 		
 	
+		public UserVo getUser(String id, String pw) {
+			
+			UserVo userVo = null;
+			getConnection();
+			
+			
+			try {
+				String query = "";
+				query +=" select	no, ";
+				query +=" 			name ";
+				query +=" from users ";
+				query +=" where id = ? ";
+				query +=" and password = ? ";
+				
+				pstmt = conn.prepareStatement(query); //쿼리로 만들기
+				pstmt.setString(1, id);
+				pstmt.setString(2, pw);
+				
+				rs = pstmt.executeQuery();
+				
+				//결과처리
+				while(rs.next()) {
+					
+					int no = rs.getInt("no");
+					String name = rs.getString("name");
+				
+					userVo = new UserVo(no,name);
+				}
+				
+			} catch (SQLException e) {
+			    System.out.println("error:" + e);
+			}
+		
+			close();
+			return userVo;
+		}
+		
+		
+		public UserVo getMdUser(int no) {
+			
+			UserVo userVo = null;
+			getConnection();
+			
+			try {
+				String query = "";
+				query +=" select	no, ";
+				query +=" 			id, ";
+				query +=" 			password, ";
+				query +=" 			name, ";
+				query +=" 			gender ";
+				query +=" from users ";
+				query +=" where no = ? ";
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, no);
+				
+				rs = pstmt.executeQuery();
+			
+				// 4. 결과처리
+				while(rs.next()) {
+					int Userno = rs.getInt("no");
+					String id = rs.getString("id");
+					String pw = rs.getString("password");
+					String name = rs.getString("name");
+					String gender = rs.getString("gender");
+					
+					userVo = new UserVo(Userno, id, pw, name, gender);
+		
+				}
+			} catch (SQLException e) {
+			    System.out.println("error:" + e);
+			}
+		
+			close();
+			return userVo;
+		}
+			
+		public int userModify(UserVo userVo) {
+			int count = 0;
+			getConnection();
+			
+			try {
+				String query ="";
+				query += " update users ";
+				query += " set	  password = ?, ";
+				query += " 		  name = ?, ";
+				query += " 		  gender = ? ";
+				query += " where no = ? ";
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userVo.getPassword());
+				pstmt.setString(2, userVo.getName());
+				pstmt.setString(3, userVo.getGender());
+						
+				count = pstmt.executeUpdate();
+				
+				//4.결과처리
+				System.out.println(count + "건 수정");
+			} catch (SQLException e) {
+			    System.out.println("error:" + e);
+			}
+			
+			close();
+			return count;
+		}
+		
 }
