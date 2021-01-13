@@ -72,7 +72,7 @@ public class UserController extends HttpServlet {
 			if(authVo==null) { //로그인 실패
 				System.out.println("로그인 실패");
 				//리다이렉트-->로그인폼
-				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm");
+				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm&result=fail");
 				
 			}else { //성공일때
 				System.out.println("로그인 성공");
@@ -103,12 +103,22 @@ public class UserController extends HttpServlet {
 			UserVo authUser = (UserVo)session.getAttribute("authUser");//session 오브젝트 -->형변환 잊어먹고 왜 안되는건가 고민하지말 것 
 			//System.out.println(authUser); 확인
 			
-			//dao --> 세션의 넘버 값으로 누군지 알아야해서  사람정보 가져옴
-			UserDao userDao = new UserDao();
-			UserVo authVo = userDao.getMdUser(authUser.getNo()); //Dao업데이트
+			int no = authUser.getNo();
 			
+			//dao --> 세션의 넘버 값으로 누군지 알아야해서  사람정보 가져옴(회원정보 가져오기)
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no); //Dao업데이트
+			
+			//userVo 받았는지 확인
+			System.out.println("getUser(no)" + userVo);
+			
+			//데이터 전달
+			request.setAttribute("userVo", userVo);
+			
+			/* 수정전 틀린내용 --> 세션의 값은 최소로 가지고 있으려하는데 굳이 보내줄 필요 없음 -> 처음 의도랑 달라짐. request 어트리뷰트로 보내자
 			//누군지 알게된 정보를 세션 어트리뷰트에 보냄
-			session.setAttribute("authMdUser", authVo);
+			//session.setAttribute("authMdUser", authVo);
+			*/
 			
 			//포워드
 			WebUtil.forword(request, response, "WEB-INF/views/user/modifyForm.jsp");
@@ -117,19 +127,39 @@ public class UserController extends HttpServlet {
 			System.out.println("회원정보수정");
 			
 			//파라미터 값
-			int no = Integer.parseInt(request.getParameter("no"));
-			String password = request.getParameter("pass");
+			String password = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
 			
+			//수정값 확인
+			System.out.println("회원정보 수정값 확인" + password + name + gender);
+			
+			//세션에서 넘버(no) 값 가져오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			
+			int no = authUser.getNo();
+			
 			//vo묶기 -> Vo 생성자 만들기
 			UserVo userVo = new UserVo(no, password, name, gender);
+			//UserVo userVo = new UserVo(no, "", password, name, gender); tip- id값을 ""비워놓아도 된다 --> 추천하진 않음
 			
-			//dao
+			//확인하기
+			System.out.println(userVo);
+			
+			//dao --> userModify()
 			UserDao userDao = new UserDao();
-			userDao.userModify(userVo);
 			
-			//s
+			//정보 수정
+			userDao.userModify(userVo); 
+			
+			
+			//수정되고난후 - 이름 바뀌면 메인페이지 이름도 바뀐 값으로 --> 세션값도 바꿔야 함 modify해야함
+			//세션의 name값만 변경하면됨 가져오기                                                 ------ 강사님 풀이 전 혼자 했을 때 이 부분 꼬임 --> 다시 공부해볼 것
+			authUser.setName(name);
+			
+			
+			WebUtil.redirect(request, response, "/mysite2/main");
 			
 		}
 		

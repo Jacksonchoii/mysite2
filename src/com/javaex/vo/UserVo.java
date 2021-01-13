@@ -23,6 +23,13 @@ public class UserVo {
 		this.gender = gender;
 	}
 
+	public UserVo(int no, String password, String name, String gender) {
+		this.no = no;
+		this.password = password;
+		this.name = name;
+		this.gender = gender;
+	}
+	
 	public UserVo(int no, String id, String password, String name, String gender) {
 		this.no = no;
 		this.id = id;
@@ -31,13 +38,6 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-	public UserVo(int no, String password, String name, String gender) {
-		super();
-		this.no = no;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-	}
 
 	public int getNo() {
 		return no;

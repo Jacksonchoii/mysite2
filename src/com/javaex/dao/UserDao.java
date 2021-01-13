@@ -94,7 +94,7 @@ public class UserDao {
 			return count;
 		}
 		
-	
+	//로그인할때 세션 저장용
 		public UserVo getUser(String id, String pw) {
 			
 			UserVo userVo = null;
@@ -133,7 +133,7 @@ public class UserDao {
 		}
 		
 		
-		public UserVo getMdUser(int no) {
+		public UserVo getUser(int no) { //메소드 오버로딩
 			
 			UserVo userVo = null;
 			getConnection();
@@ -185,10 +185,12 @@ public class UserDao {
 				query += " where no = ? ";
 				
 				pstmt = conn.prepareStatement(query);
+				
 				pstmt.setString(1, userVo.getPassword());
 				pstmt.setString(2, userVo.getName());
 				pstmt.setString(3, userVo.getGender());
-						
+				pstmt.setInt(4, userVo.getNo());	
+				
 				count = pstmt.executeUpdate();
 				
 				//4.결과처리

@@ -31,10 +31,10 @@
 				<a href="/mysite2/main">MySite</a>
 			</h1>
 
-			<ul>
-				<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
-			</ul>
+			<!-- header + navi 공통으로 옮겼음 -->
+			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+			<!-- //nav -->
+			
 		</div>
 		<!-- //header -->
 
@@ -132,10 +132,9 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
+		
 
 	</div>
 	<!-- //wrap -->

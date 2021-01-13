@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%
-	UserVo authUser = (UserVo)session.getAttribute("authUser"); //session 이름으로 영역이 이미 있기 때문에 바로 .사용 가능  *주의 저장된공간=session영역 
-
-
-%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,40 +13,8 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
-			<!-- if()로그인 안했을 때 -->
-			<%if(authUser==null) {%>
-			<ul>
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-			</ul>
-			
-			<!-- 아래는 로그인 했을 때 -->
-			<%}else { %>
-			<ul>
-				<li><%=authUser.getName() %> 님 안녕하세요^^</li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">회원정보수정</a></li>
-			</ul>
-			<%} %>
-			
-		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-		<!-- //nav -->
+		<!-- header + navi 공통으로 옮겼음 -->
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
 		<div id="aside">
 			<h2>회원</h2>
@@ -140,9 +99,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+		<<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>
