@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%
-	UserVo authUser = (UserVo)session.getAttribute("authUser"); //session 이름으로 영역이 이미 있기 때문에 바로 .사용 가능  *주의 저장된공간=session영역 
-
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -22,7 +16,7 @@
 	<div id="wrap">
 
 		<!-- header + navi 공통으로 옮겼음 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
 		<!-- aside없음 -->
 
@@ -64,7 +58,7 @@
 		<!-- //full-content -->
 		<div class="clear"></div>
 		
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

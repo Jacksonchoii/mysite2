@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%
-	String result = request.getParameter("result");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +14,7 @@
 	<div id="wrap">
 
 		<!-- header + navi 공통으로 옮겼음 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="aside">
@@ -61,11 +58,11 @@
 							<input type="text" id="input-pass" name="pw" value="" placeholder="비밀번호를 입력하세요"	>
 						</div>
 
-						<%if("fail".equals(result)) {%>
+						<c:if test="${param.result == 'fail'}">
 						<p>
 							[로그인에 실패했습니다. 다시 로그인 해주세요.]
 						</p>
-						<%} %>
+						</c:if>
 						
 						<!-- 버튼영역 -->
 		                <div class="button-area">
@@ -81,7 +78,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
