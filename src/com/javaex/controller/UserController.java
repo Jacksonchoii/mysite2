@@ -161,7 +161,7 @@ public class UserController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
-		}
+		} 
 		
 	}
 

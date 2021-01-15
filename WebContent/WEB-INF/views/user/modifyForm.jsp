@@ -2,9 +2,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="com.javaex.vo.UserVo" %>
-
-
 
 <!DOCTYPE html>
 <html>

@@ -121,9 +121,9 @@ public class GuestbookDao {
 
 				int no = rs.getInt("no");
 				String name = rs.getString("name");
-				String password = rs.getNString("password");
-				String content = rs.getNString("content");
-				String regDate = rs.getNString("reg_date");
+				String password = rs.getString("password");
+				String content = rs.getString("content");
+				String regDate = rs.getString("reg_date");
 
 				GuestbookVo gvo = new GuestbookVo(no, name, password, content, regDate);
 
