@@ -59,7 +59,7 @@ public class BoardDao {
 
 	}
 
-	/* java.sql.SQLException: 부적합한 열 이름 --->*/
+	
 	
 	// 게시판 리스트 
 		public List<BoardVo> getBoardList() { 
