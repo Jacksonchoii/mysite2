@@ -50,43 +50,39 @@
 						<!-- 작성자 -->
 						<div class="form-group">
 							<span class="form-text">작성자</span>
-							<span class="form-value">정우성</span>
+							<span class="form-value">${boardRead.name}</span>
 						</div>
 						
 						<!-- 조회수 -->
 						<div class="form-group">
 							<span class="form-text">조회수</span>
-							<span class="form-value">123</span>
+							<span class="form-value">${boardRead.hit}</span>
 						</div>
 						
 						<!-- 작성일 -->
 						<div class="form-group">
 							<span class="form-text">작성일</span>
-							<span class="form-value">2020-03-02</span>
+							<span class="form-value">${boardRead.regDate}</span>
 						</div>
 						
 						<!-- 제목 -->
 						<div class="form-group">
 							<span class="form-text">제 목</span>
-							<span class="form-value">여기에는 글제목이 출력됩니다.</span>
+							<span class="form-value">${boardRead.title}</span>
 						</div>
 					
 						<!-- 내용 -->
 						<div id="txt-content">
 							<span class="form-value" >
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br>
+								${boardRead.content}
 							</span>
 						</div>
 						
-						<a id="btn_modify" href="">수정</a>
-						<a id="btn_modify" href="">목록</a>
+						<!-- 이름으로하면 동일인물 겹침X , 로그인한 no로 구별 -->
+						<c:if test="${boardRead.userNo == sessionScope.authUser.no}"> 
+						<a id="btn_modify" href="/mysite2/board?action=modifyForm&no=${boardRead.no}">수정</a>
+						</c:if>
+						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>
 						
 					</form>
 	                <!-- //form -->

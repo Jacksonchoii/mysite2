@@ -65,15 +65,19 @@
 							</tr>
 						</thead>
 						<tbody> <!-- 아래부터 데이터 받아오고 반복할 것 -->
-							<c:forEach items="${requestScope.boardList} var="bl">
+							<c:forEach items="${boardList}" var="bL">
 								<tr>
-									<td>${bl.no}</td>
-									<td class="text-left"><a href="#">${bl.title}</a></td>
-									<td>${bl.name}</td>
-									<td>${bl.hit}</td>
-									<td>${bl.reg_date}</td>
+									<td>${bL.no}</td>
+									<td class="text-left"><a href="/mysite2/board?action=read&no=${bL.no}">${bL.title}</a></td>
+									<td>${bL.name}</td>
+									<td>${bL.hit}</td>
+									<td>${bL.regDate}</td>
 									<!-- 자신의 글에만 삭제버튼 if로그인 기록 같으면 보이게하기 -->
-									<td><a href="">[삭제]</a></td>
+									<td>
+										<c:if test="${bL.no == sessionScope.authUser.no}">
+											<a href="/mysite2/board?action=delete&no=${bL.no}">[삭제]</a>
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -99,8 +103,9 @@
 						<div class="clear"></div>
 					</div>
 					
-					<a id="btn_write" href="/mysite2/board?action=writeForm">글쓰기</a>
-				
+					<c:if test="${authUser != null}"> <!-- sessionScope -->
+						<a id="btn_write" href="/mysite2/board?action=writeForm">글쓰기</a>
+					</c:if>
 				</div>
 				<!-- //list -->
 			</div>
