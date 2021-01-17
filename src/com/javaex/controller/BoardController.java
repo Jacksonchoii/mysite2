@@ -69,20 +69,7 @@ public class BoardController extends HttpServlet {
 			//리다이렉트
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 			
-		} else if("delete".equals(action)) {
-			System.out.println("게시글 삭제");
-		
-			//no값 파라미터에서 가져오기
-			int no = Integer.parseInt(request.getParameter("no"));
-			
-			//Dao 삭제
-			BoardDao boardDao = new BoardDao();
-			boardDao.boardDelete(no);
-			
-			//리다이렉트 삭제 후 게시글없어진 화면
-			WebUtil.redirect(request, response, "/mysite2/board?action=list");
-		
-		} else if("read".equals(action)) {
+		}  else if("read".equals(action)) {
 			System.out.println("게시글 보기");
 			
 			//파라미터 no값 가져오기
@@ -121,18 +108,32 @@ public class BoardController extends HttpServlet {
 			System.out.println("게시글 수정");
 			
 			//파라미터 값
-			int no = Integer.parseInt(request.getParameter("no"));
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+			int no = Integer.parseInt(request.getParameter("no"));
 			
 			//Dao modify
-			BoardVo boardVo = new BoardVo(no, title, content);
+			BoardVo boardVo = new BoardVo(title, content, no);
 			BoardDao boardDao = new BoardDao();
 			
 			boardDao.boardModify(boardVo);
 			
 			//리다이렉트
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
+		
+		} else if("delete".equals(action)) {
+			System.out.println("게시글 삭제");
+		
+			//no값 파라미터에서 가져오기
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			//Dao 삭제
+			BoardDao boardDao = new BoardDao();
+			boardDao.boardDelete(no);
+			
+			//리다이렉트 삭제 후 게시글없어진 화면
+			WebUtil.redirect(request, response, "/mysite2/board?action=list");
+		
 		}
 		
 	}

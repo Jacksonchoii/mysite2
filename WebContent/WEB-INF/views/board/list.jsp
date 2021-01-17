@@ -65,16 +65,16 @@
 							</tr>
 						</thead>
 						<tbody> <!-- 아래부터 데이터 받아오고 반복할 것 -->
-							<c:forEach items="${boardList}" var="bL">
+							<c:forEach items="${requestScope.boardList}" var="bL">
 								<tr>
 									<td>${bL.no}</td>
 									<td class="text-left"><a href="/mysite2/board?action=read&no=${bL.no}">${bL.title}</a></td>
 									<td>${bL.name}</td>
 									<td>${bL.hit}</td>
-									<td>${bL.regDate}</td>
+									<td>${bL.reg_date}</td>
 									<!-- 자신의 글에만 삭제버튼 if로그인 기록 같으면 보이게하기 -->
 									<td>
-										<c:if test="${bL.no == sessionScope.authUser.no}">
+										<c:if test="${bL.user_no == sessionScope.authUser.no}">
 											<a href="/mysite2/board?action=delete&no=${bL.no}">[삭제]</a>
 										</c:if>
 									</td>

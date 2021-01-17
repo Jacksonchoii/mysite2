@@ -62,7 +62,7 @@
 						<!-- 작성일 -->
 						<div class="form-group">
 							<span class="form-text">작성일</span>
-							<span class="form-value">${boardRead.regDate}</span>
+							<span class="form-value">${boardRead.reg_date}</span>
 						</div>
 						
 						<!-- 제목 -->
@@ -79,7 +79,7 @@
 						</div>
 						
 						<!-- 이름으로하면 동일인물 겹침X , 로그인한 no로 구별 -->
-						<c:if test="${boardRead.userNo == sessionScope.authUser.no}"> 
+						<c:if test="${boardRead.user_no == sessionScope.authUser.no}"> 
 						<a id="btn_modify" href="/mysite2/board?action=modifyForm&no=${boardRead.no}">수정</a>
 						</c:if>
 						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>
