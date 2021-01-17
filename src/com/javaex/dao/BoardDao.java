@@ -59,56 +59,7 @@ public class BoardDao {
 
 	}
 
-	/* --  java.sql.SQLException: 부적합한 열 이름 -- why?...--> 순서..
-	// 게시판 리스트
-	public List<BoardVo> getBoardList() { 
-
-		List<BoardVo> boardList = new ArrayList<BoardVo>();
-
-		getConnection();
-
-		try {
-			// SQL문 준비 / 바인딩 / 실행 
-			String query = "";
-			query += " select	b.no, ";
-			query += " 			b.title, ";
-			query += " 			b.content, ";
-			query += " 			u.name, ";
-			query += " 			b.hit, ";
-			query += " 			to_char(b.reg_date, 'yyyy-mm-dd'), ";
-			query += " 			b.user_no ";
-			query += " from board b, users u ";
-			query += " where b.user_no = u.no ";
-
-			pstmt = conn.prepareStatement(query);
-
-			rs = pstmt.executeQuery();
-
-			// 결과 처리
-			
-			while(rs.next()) {
-				
-				int no = rs.getInt("no");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				String name = rs.getString("name");
-				int hit = rs.getInt("hit");
-				String reg_date = rs.getString("reg_date");
-				int user_no = rs.getInt("user_no");
-				
-				BoardVo boardVo = new BoardVo(no, title, content, name, hit, reg_date, user_no);
-				boardList.add(boardVo);
-				
-			}
-
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		}
-
-		close();
-		return boardList;
-	}
-	*/
+	/* java.sql.SQLException: 코부적합한 열 이름 --->ㅇㅇㄴㅁㅇㄴ*/
 
 	// 게시판 리스트 -- 오류 안남
 		public List<BoardVo> getBoardList() { 
