@@ -24,22 +24,18 @@ public class BoardVo {
 		this.user_no = user_no;
 	}
 
-
 	
-	//게시판리스트
-	public BoardVo(int no, String title, String name, int hit, String reg_date, int user_no) {
+	//게시글수정
+	public BoardVo(int no, String title, String content) {
 		super();
 		this.no = no;
 		this.title = title;
-		this.name = name;
-		this.hit = hit;
-		this.reg_date = reg_date;
-		this.user_no = user_no;
+		this.content = content;
 	}
 
 
-
-	public BoardVo(int no, String name, int hit, String reg_date,  String title, String content, int user_no) {
+	//게시판리스트
+	public BoardVo(int no, String title, String name, String content, int hit, String reg_date, int user_no) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -50,8 +46,17 @@ public class BoardVo {
 		this.user_no = user_no;
 	}
 
-
-
+	//게시글 보기
+	public BoardVo(String name, int hit, String reg_date, String title, String content, int user_no, int no) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.name = name;
+		this.hit = hit;
+		this.reg_date = reg_date;
+		this.user_no = user_no;
+	}
 
 
 	public int getNo() {

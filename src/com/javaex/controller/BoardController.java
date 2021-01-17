@@ -108,12 +108,13 @@ public class BoardController extends HttpServlet {
 			System.out.println("게시글 수정");
 			
 			//파라미터 값
+			int no = Integer.parseInt(request.getParameter("no"));
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			int no = Integer.parseInt(request.getParameter("no"));
+			
 			
 			//Dao modify
-			BoardVo boardVo = new BoardVo(title, content, no);
+			BoardVo boardVo = new BoardVo(no, title, content);
 			BoardDao boardDao = new BoardDao();
 			
 			boardDao.boardModify(boardVo);

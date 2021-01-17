@@ -59,7 +59,7 @@ public class BoardDao {
 
 	}
 
-	/* --  java.sql.SQLException: 부적합한 열 이름 -- why?...
+	/* --  java.sql.SQLException: 부적합한 열 이름 -- why?...--> 순서..
 	// 게시판 리스트
 	public List<BoardVo> getBoardList() { 
 
@@ -122,17 +122,14 @@ public class BoardDao {
 				String query = "";
 				query += " SELECT  b.no, ";
 				query += "         title, ";
+				query += "         name, ";
 				query += "         content, ";
 				query += "         hit, ";
 				query += "         to_char(reg_date, 'YYYY-MM-DD') reg_date, ";
-				query += "         user_no, ";
-				query += "         id, ";
-				query += "         password, ";
-				query += "         name, ";
-				query += "         gender ";
+				query += "         user_no ";
 				query += " FROM board b, users u ";
 				query += " where b.user_no = u.no ";
-				query += " order by b.no desc ";
+			
 
 				pstmt = conn.prepareStatement(query);
 
@@ -143,11 +140,12 @@ public class BoardDao {
 					int no = rs.getInt("no");
 					String title = rs.getString("title");
 					String name = rs.getString("name");
+					String content = rs.getString("content");
 					int hit = rs.getInt("hit");
-					String regDate = rs.getString("reg_date");
-					int userNo = rs.getInt("user_no");
+					String reg_date = rs.getString("reg_date");
+					int user_no = rs.getInt("user_no");
 
-					BoardVo boardVo = new BoardVo(no, title, name, hit, regDate, userNo);
+					BoardVo boardVo = new BoardVo(no, title, name, content, hit, reg_date, user_no);
 					boardList.add(boardVo);
 				}
 
@@ -199,13 +197,13 @@ public class BoardDao {
 		try {
 			// SQL문 준비 / 바인딩 / 실행 
 			String query = "";
-			query += " SELECT  b.no, ";
-			query += "         name, ";
+			query += " SELECT  name, ";
 			query += "         hit, ";
 			query += "         to_char(reg_date, 'YYYY-MM-DD') reg_date, ";
 			query += "         title, ";
 			query += "         content, ";
-			query += "         user_no ";
+			query += "         user_no, ";
+			query += "         b.no ";
 			query += " FROM board b, users u ";
 			query += " where  b.user_no = u.no ";
 			query += " and b.no = ? ";
@@ -218,15 +216,15 @@ public class BoardDao {
 
 			// 결과 처리
 			while(rs.next()) {
-				int bNo = rs.getInt("no");
 				String name = rs.getString("name");
 				int hit = rs.getInt("hit");
 				String reg_date = rs.getString("reg_date");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
 				int user_no = rs.getInt("user_no");
+				int bNo = rs.getInt("no");
 				
-				boardVo = new BoardVo(bNo, name, hit, reg_date, title, content, user_no);
+				boardVo = new BoardVo(name, hit, reg_date, title, content, user_no, bNo);
 			}
 			
 		} catch (SQLException e) {
