@@ -59,9 +59,9 @@ public class BoardDao {
 
 	}
 
-	/* java.sql.SQLException: 코부적합한 열 이름 --->ㅇㅇㄴㅁㅇㄴ*/
-
-	// 게시판 리스트 -- 오류 안남
+	/* java.sql.SQLException: 부적합한 열 이름 --->*/
+	
+	// 게시판 리스트 
 		public List<BoardVo> getBoardList() { 
 
 			List<BoardVo> boardList = new ArrayList<BoardVo>();
@@ -109,7 +109,7 @@ public class BoardDao {
 			return boardList;
 		}
 	
-	//게시판 글쓰기ㅣ
+	//게시판 글쓰기
 	public int boardWrite(BoardVo boardVo) {
 		
 		int count = 0;
